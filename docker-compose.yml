@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  icecast:
+    build:
+      context: ./icecast-docker
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    environment:
+      - ICECAST_SOURCE_PW=hackme 
+  mpd:
+    build:
+      context: ./mpd-docker
+      dockerfile: Dockerfile   
+    environment:
+      - STREAM_ENCODING=vorbis
+      - STREAM_BITRATE=192
+      - STREAM_MOUNT_POINT=mystream
+    volumes:
+      - ./music:/music/
