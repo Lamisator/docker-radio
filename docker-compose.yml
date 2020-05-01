@@ -17,7 +17,7 @@ services:
       - STREAM_BITRATE=192
       - STREAM_MOUNT_POINT=mystream
     volumes:
-      - ./music/music/
+      - ./music:/music/
   mpc:
     build:
       context: ./mpd-docker
