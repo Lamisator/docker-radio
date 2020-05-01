@@ -17,4 +17,12 @@ services:
       - STREAM_BITRATE=192
       - STREAM_MOUNT_POINT=mystream
     volumes:
-      - ./music:/music/
+      - ./music/music/
+  mpc:
+    build:
+      context: ./mpd-docker
+      dockerfile: Dockerfile
+    command: bash -c "mpc -h mpd update && mpc -h mpd ls | mpc -h mpd add && mpc -h mpd shuffle && mpc -h mpd play && echo 'Playing...'"
+    depends_on:
+      - icecast
+      - mpd 
